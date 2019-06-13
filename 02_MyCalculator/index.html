@@ -4,12 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <title>My Calculator</title>
+    <style>
+        #div_all {
+            position: absolute;
+            top: 20%;
+            left: 33%;
+        }
+
+        span {
+            display: inline-block;
+            border: 1px solid black;
+            width: 60px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            margin: 20px 6px 6px 10px;
+            padding: 4px;
+        }
+
+        span:hover {
+            opacity: 0.4;
+            cursor: pointer;
+        }
+
+        span:active {
+            background-color: pink;
+        }
+
+        #show {
+            width: 350px;
+            height: 100px;
+            border: 5px solid black;
+            font-size: 60px;
+            text-align: right;
+            line-height: 100px;
+
+        }
+
+        #button {
+            width: 350px;
+            height: 360px;
+            border: 5px solid black;
+            position: absolute;
+        }
+
+        #cal {
+            position: relative;
+            top: -330px;
+            left: 265px;
+        }
+
+        #cal>p {
+            width: 50px;
+            height: 45px;
+            margin: 15px;
+            padding: 0px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
 </head>
 
 <body>
 
-   <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
-    
+    <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
+    <div id="div_all">
+        <div id="show"></div>
+        <div id="button">
+            <div class="number">
+                <span>7</span>
+                <span>8</span>
+                <span>9</span><br />
+                <span>4</span>
+                <span>5</span>
+                <span>6</span><br />
+                <span>1</span>
+                <span>2</span>
+                <span>3</span><br />
+                <span>0</span>
+                <span>.</span>
+                <span>=</span>
+            </div>
+            <div id="cal">
+                <p>÷</p>    
+                <p>x</p>
+                <p>-</p>
+                <p id = 'add'>+</p>
+                <p>+</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var span = document.getElementsByTagName("span");
+            var show = document.getElementById("show");
+            var arr = new Array();
+            for (var i = 0; i < span.length; i++) {
+                span[i].onclick = function () {                  
+                    show.innerHTML += this.innerHTML;
+                    
+                }
+            }
+
+            var add = document.getElementById("add").addEventListener('click',function(){
+                arr.push(Number(show.innerHTML))
+                arr.push("+")
+                show.innerHTML = ""               
+                console.log(arr.join(""));   
+            })
+
+        }
+
+
+    </script>
 </body>
 
 </html>

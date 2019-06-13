@@ -8,10 +8,15 @@
 <head>
     <meta charset="UTF-8">
     <title>輸入聖誕樹的高度，然後用*組合出來</title>
+    <style>
+        p{
+            text-align: center
+        }
+    </style>
 </head>
 
 <body>
-
+    <div id = "star"></div>
     <script>
         // 分解動作
         // 1. 觀察列和星星數量的變化: 星星數量 = 最終列 + 最終列 - 1
@@ -22,6 +27,20 @@
         //    第三列：1=>1、7=>7
         //    第四列：
         // 3. 觀察星星中間位置: 中間位置 = 最終列
+
+        var height = prompt("請輸入高度")
+        var star = "";
+        var number = 1;
+        for(var i=1;i<=height;i++){
+            star+="<p>"
+            for(var a=1;a<=number;a++){
+                star+="*";
+            }
+            star+="</P>"
+            number+=2
+        }
+
+        document.getElementById("star").innerHTML = star;
     </script>
 </body>
 
