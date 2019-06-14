@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div id = "star"></div>
+    <span id = "star"></spsn>
     <script>
         // 分解動作
         // 1. 觀察列和星星數量的變化: 星星數量 = 最終列 + 最終列 - 1
@@ -28,19 +28,33 @@
         //    第四列：
         // 3. 觀察星星中間位置: 中間位置 = 最終列
 
-        var height = prompt("請輸入高度")
+        /*var height = prompt("請輸入高度")
         var star = "";
         var number = 1;
-        for(var i=1;i<=height;i++){
+        for(var i=1;i<=height;i++,number+=2){
             star+="<p>"
             for(var a=1;a<=number;a++){
                 star+="*";
             }
             star+="</P>"
-            number+=2
         }
+        document.getElementById("star").innerHTML = star;*/
 
-        document.getElementById("star").innerHTML = star;
+        var stars = "";
+        var rows = 5;
+        for(var i=1;i<=6;i++){
+            for(var j=1;j<=(rows*2-1);j++){
+                if(j<=(rows-1) || j>=(rows+i)){
+                    stars+="&emsp;"
+                }else{
+                    stars+="*"
+                }
+            }
+            stars+="<br/>";
+        }
+        document.getElementById("star").innerHTML = stars;   
+
+
     </script>
 </body>
 
