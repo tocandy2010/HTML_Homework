@@ -1,123 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYsspananE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>My Calculator</title>
-    <style>
-        #div_all {
-            position: absolute;
-            top: 20%;
-            left: 33%;
-        }
-
-        span {
-            display: inline-block;
-            border: 1px solid black;
-            width: 60px;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            margin: 20px 6px 6px 10px;
-            padding: 4px;
-        }
-
-        span:hover {
-            opacity: 0.4;
-            cursor: pointer;
-        }
-
-        span:active {
-            background-color: pink;
-        }
-
-        #show {
-            width: 350px;
-            height: 100px;
-            border: 5px solid black;
-            font-size: 60px;
-            text-align: right;
-            line-height: 100px;
-
-        }
-
-        #button {
-            width: 350px;
-            height: 360px;
-            border: 5px solid black;
-            position: absolute;
-        }
-
-        #cal {
-            position: relative;
-            top: -330px;
-            left: 265px;
-        }
-
-        #cal>p {
-            width: 50px;
-            height: 45px;
-            margin: 15px;
-            padding: 0px;
-            border: 1px solid black;
-            text-align: center;
-            line-height: 50px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
-    <div id="div_all">
-        <div id="show"></div>
-        <div id="button">
-            <div class="number">
-                <span>7</span>
-                <span>8</span>
-                <span>9</span><br />
-                <span>4</span>
-                <span>5</span>
-                <span>6</span><br />
-                <span>1</span>
-                <span>2</span>
-                <span>3</span><br />
-                <span>0</span>
-                <span>.</span>
-                <span>=</span>
-            </div>
-            <div id="cal">
-                <p>÷</p>    
-                <p>x</p>
-                <p>-</p>
-                <p id = 'add'>+</p>
-                <p>+</p>
-            </div>
-        </div>
-    </div>
-    <script>
-        window.onload = function () {
-            var span = document.getElementsByTagName("span");
-            var show = document.getElementById("show");
-            var arr = new Array();
-            for (var i = 0; i < span.length; i++) {
-                span[i].onclick = function () {                  
-                    show.innerHTML += this.innerHTML;
-                    
-                }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+            #div_all {
+                position: relative;
+                top: 100px;
+                left: 400px;
+                width:351px;
+                border: 2px solid black;
+                background-color: rgb(228, 203, 207)
             }
 
-            var add = document.getElementById("add").addEventListener('click',function(){
-                arr.push(Number(show.innerHTML))
-                arr.push("+")
-                show.innerHTML = ""               
-                console.log(arr.join(""));   
+            #div_show {
+                border: 2px solid black;
+                width: 350px;
+                height: 90px;
+            }
+
+            #show_1 {
+                border: 2px solid black;
+                width: 350px;
+                height: 50%;
+                text-align: right;
+                font-size: 2rem;
+                padding: -20px;
+                word-break: break-all;
+            }
+
+            #show_2 {
+                border: 2px solid black;
+                width: 350px;
+                height: 50%;
+                text-align: right;
+                font-size: 2rem;
+            }
+
+            #div_show>p {
+                width: 100%;
+                height: 50px;
+                font-size: 2rem;
+                text-align: right;
+                margin-left: -10px;
+            }
+
+            #div_button {
+                border: 3px solid black;
+                border-top: 5px solid black;
+                width: 350px;
+                height: 400px;
+            }
+
+            .number>span {
+                display: inline-block;
+                font-size: 2rem;
+                width: 40px;
+                height: 40px;
+                border: 2px solid white;
+                margin-top: 30px;
+                margin-left: 15px;
+                padding: 10px;
+                text-align: center;
+                box-shadow:1px 1px rgba(20%,20%,40%,0.5);
+            }
+
+            .number>span:hover {
+                border: 2px solid black;
+                cursor: pointer;
+                background-color: black;
+                color:white;
+            }
+
+            .number>span:active {
+                background-color: darkgray;
+                user-select: none;
+            }
+
+            .symbol>span {
+                display: inline-block;
+                font-size: 2rem;
+                width: 40px;
+                height: 40px;
+                border: 2px solid white;
+                position: relative;
+                bottom: 376px;
+                left: 250px;
+                text-align: center;
+                margin-top: 30px;
+                margin-left: 10px;
+                padding: 10px;
+                box-shadow:1px 1px brown
+            }
+
+            .symbol>span:hover {
+                background-color: brown;
+                cursor: pointer;
+            }
+
+            .symbol>span:active {
+                background-color: darkred;
+                user-select: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="div_all">
+            <div id="div_show">
+                <div id="show_1"></div>
+                <div id="show_2"></div>
+            </div>
+            <div id="div_button">
+                <div class="number">
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+                <div class="number">
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                </div>
+                <div class="number">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                </div>
+                <div class="number">
+                    <span>0</span>
+                    <span>.</span>
+                    <span id="result">=</span>
+                </div>
+                <div class="symbol">
+                    <span>/</span><br>
+                    <span>-</span><br>
+                    <span>*</span><br>
+                    <span>+</span><br>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var span_all = document.getElementsByTagName("span");
+            var show = document.getElementById("show_1");
+            var data = new Array();
+            for (let i = 0; i < span_all.length; i++) {
+                span_all[i].addEventListener("click", function (ev) {
+                    var row = this.innerHTML;
+                    if (row !== "=") {
+                        show.innerHTML += row;
+                        data.push(row);
+                    }
+
+                })
+            }
+            document.getElementById("result").addEventListener("click", function () {
+                var merge = data.join("");
+                document.getElementById("show_2").innerHTML = eval(merge).toFixed(2);
             })
 
-        }
 
+        </script>
+    </body>
 
-    </script>
-</body>
-
-</html>
+    </html>
