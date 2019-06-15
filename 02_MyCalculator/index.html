@@ -9,11 +9,11 @@
         <style>
             #div_all {
                 position: relative;
-                top: 100px;
                 left: 400px;
-                width:351px;
+                width: 351px;
                 border: 2px solid black;
-                background-color: rgb(228, 203, 207)
+                background-color: rgb(228, 203, 207);
+                user-select: none;
             }
 
             #div_show {
@@ -25,7 +25,7 @@
             #show_1 {
                 border: 2px solid black;
                 width: 350px;
-                    height: 50%;
+                height: 50%;
                 text-align: right;
                 font-size: 2rem;
                 padding: -20px;
@@ -52,7 +52,7 @@
                 border: 3px solid black;
                 border-top: 5px solid black;
                 width: 350px;
-                height: 400px;
+                height: 450px;
             }
 
             .number>span {
@@ -65,19 +65,18 @@
                 margin-left: 15px;
                 padding: 10px;
                 text-align: center;
-                box-shadow:1px 1px rgba(20%,20%,40%,0.5);
+                box-shadow: 1px 1px rgba(20%, 20%, 40%, 0.5);
             }
 
             .number>span:hover {
                 border: 2px solid black;
                 cursor: pointer;
                 background-color: black;
-                color:white;
+                color: white;
             }
 
             .number>span:active {
                 background-color: darkgray;
-                user-select: none;
             }
 
             .symbol>span {
@@ -93,7 +92,7 @@
                 margin-top: 30px;
                 margin-left: 10px;
                 padding: 10px;
-                box-shadow:1px 1px brown
+                box-shadow: 1px 1px brown
             }
 
             .symbol>span:hover {
@@ -103,7 +102,29 @@
 
             .symbol>span:active {
                 background-color: darkred;
-                user-select: none;
+            }
+
+            .clean {
+                display: inline-block;
+                font-size: 2rem;
+                width: 295px;
+                height: 40px;
+                border: 2px solid white;
+                margin-top: 10px;
+                margin-left: 15px;
+                margin-bottom: -20px;
+                padding: 10px;
+                text-align: center;
+                box-shadow: 1px 1px rgba(20%, 20%, 40%, 0.5);
+            }
+
+            .clean:hover {
+                background-color: greenyellow;
+                cursor: pointer;
+            }
+
+            .clean:active {
+                background-color: green;
             }
         </style>
     </head>
@@ -115,6 +136,9 @@
                 <div id="show_2"></div>
             </div>
             <div id="div_button">
+                <div class="clean">
+                    <span>AC</span>
+                </div>
                 <div class="number">
                     <span>7</span>
                     <span>8</span>
@@ -145,25 +169,105 @@
         </div>
 
         <script>
-            var span_all = document.getElementsByTagName("span");
-            var show = document.getElementById("show_1");
-            var data = new Array();
-            for (let i = 0; i < span_all.length; i++) {
-                span_all[i].addEventListener("click", function (ev) {
-                    var row = this.innerHTML;
-                    if (row !== "=") {
-                        show.innerHTML += row;
-                        data.push(row);
+            window.onload = function () {
+                var span_all = document.getElementsByTagName("span");
+                var show_1 = document.getElementById("show_1");
+                var show_2 = document.getElementById("show_2");
+                var data = new Array();
+                for (let i = 0; i < span_all.length; i++) {
+                    span_all[i].addEventListener("click", function (ev) {
+                        if (show_1.innerHTML.length > 14) {
+                            return false;
+                        }
+                        var row = this.innerHTML;
+                        if (row !== "=") {
+                            show_1.innerHTML += row;
+                            data.push(row);
+                        }
+
+                    })
+                }
+                document.getElementById("result").addEventListener("click", function () {
+                    var merge = data.join("");
+                    if (isNaN(data[data.length - 1])) {
+                        alert("運算是錯誤")
+                        return false;
+                    }
+                    var answer = eval(merge)
+                    if (answer) {
+                        document.getElementById("show_2").innerHTML = answer.toFixed(2)
+                    } else {
+                        alert("運算是錯誤")
+                        return false;
                     }
 
+
+                })
+
+                document.getElementsByClassName("clean")[0].addEventListener("click", function () {
+                    data = [];
+                    show_1.innerHTML = show_2.innerHTML = "";
+
+                })
+
+                document.getElementsByTagName("body")[0].addEventListener("keydown", function (ev) {
+                    if (show_1.innerHTML.length < 15) {
+                        switch (ev.keyCode) {
+                            case 49:
+                                show_1.innerHTML += "1";
+                                data.push("1");
+                                break;
+                            case 50:
+                                show_1.innerHTML += "2";
+                                data.push("2");
+                                break;
+                            case 51:
+                                show_1.innerHTML += "3";
+                                data.push("3");
+                                break;
+                            case 52:
+                                show_1.innerHTML += "4";
+                                data.push("4");
+                                break;
+                            case 53:
+                                show_1.innerHTML += "5";
+                                data.push("5");
+                                break;
+                            case 54:
+                                show_1.innerHTML += "6";
+                                data.push("6");
+                                break;
+                            case 55:
+                                show_1.innerHTML += "7";
+                                data.push("7");
+                                break;
+                            case 56:
+                                show_1.innerHTML += "8";
+                                data.push("8");
+                                break;
+                            case 57:
+                                show_1.innerHTML += "9";
+                                break;
+                            case 48:
+                                show_1.innerHTML += "0";
+                                data.push("0");
+                                break;
+                            default:
+                                false;
+                        }
+                    }
+                    switch (ev.keyCode) {
+                        case 27:
+                            show_1.innerHTML = show_2.innerHTML = "";
+                            data = [];
+                        case 8:
+                            show_1.innerHTML = show_1.innerHTML.slice(0, -1)
+                            data.pop();
+                        default:
+                            false;
+                    }
                 })
             }
-            document.getElementById("result").addEventListener("click", function () {
-                var merge = data.join("");
-                document.getElementById("show_2").innerHTML = eval(merge).toFixed(2);
-            })
-
-
         </script>
     </body>
 
