@@ -61,30 +61,30 @@
                 var number_length = 15;  //計算機最大位數
                 var body = document.getElementsByTagName("body")[0];
                 for (let i = 0; i < span_all.length; i++) {
-                    span_all[i].addEventListener("click", function (ev) { 
+                    span_all[i].addEventListener("click", function (ev) {
                         var row = this.innerHTML;
                         // if (row !== "=") {
                         //     show_1.innerHTML += row;
                         //     data.push(row);
                         // }
                         switch (row) {  //遇到四則運算符號清空show_1
-                            case "+":s1_Ope(row,data);
+                            case "+": s1_Ope(row, data);
                                 break;
-                            case "-":s1_Ope(row,data);
+                            case "-": s1_Ope(row, data);
                                 break;
-                            case "*":s1_Ope(row,data);
+                            case "*": s1_Ope(row, data);
                                 break;
-                            case "/":s1_Ope(row,data);
+                            case "/": s1_Ope(row, data);
                                 break;
-                            case "=":return false;
+                            case "=": return false;
                                 break;
                             default:
                                 show_1.innerHTML += row;
                                 data.push(row);
                         }
                         if (show_1.innerHTML.length > 14) {
-                             return false;
-                         }
+                            return false;
+                        }
                     })
                 }
 
@@ -150,27 +150,31 @@
                         return false;
                     }
                     var answer = eval(merge)
-                    if (answer !== false) {   // 判斷運算事是否成立
-                        document.getElementById("show_2").innerHTML = addComma(answer);
+                    if ((answer !== false) && answer !== Infinity) {   // 判斷運算事是否成立
+                        show_2.innerHTML = addComma(answer);
                         data = [];
                         data.push(answer)
-                        console.log(data);
                     } else {
-                        alert("運算是錯誤")
+                        alert("運算式錯誤")
+                        data = [];
                         return false;
                     }
                 })
             }
 
-            function addComma(str) { //加入計算結果3位一逗號
+            function addComma(str) { //加入計算結果3位一逗號          
                 str = String(str); //將傳入的參數轉為字串
+                var point = str.indexOf(".");
+                var afterPoint = str.slice(point);  //將小數點後面分出來
+                str = str.slice(0, point);
+                console.log(str)
                 var data = "";
                 var length = -3;
                 while (str.length > 3) {  //當原字串長度小於3時則停止
                     data = "," + str.slice(length) + data; //每次截倒數3個字,並在前方加入逗號傳入data
                     str = str.slice(0, length)  //原字串被截後重新覆蓋被截後的字串
                 }
-                data = str += data;
+                data = str + data + afterPoint;
                 return data
             }
 
@@ -191,7 +195,7 @@
                 alert(message);
             }
 
-            function s1_Ope(ope,arr){  //當畫面中的 + - * / 點擊後清空show_1
+            function s1_Ope(ope, arr) {  //當畫面中的 + - * / 點擊後清空show_1
                 show_1.innerHTML = "";
                 arr.push(ope);
             }
